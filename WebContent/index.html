@@ -1,10 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="ISO-8859-1">
+	<title>Spotify</title>
+		<link rel = "stylesheet" type = "text/css"  href = "CSS.css"/>
+	
 </head>
 <body>
-Hello World
+	<form id="search-form">
+	    <div class="search">
+	      	<input id="address" type="text" onkeypress="handle(event)" placeholder="Search" class="round" color="white">
+			<input id="search" type="button" value="search" onClick="search_func()">
+	    </div>
+	</form>
+	<script>
+		function search_func(){
+			address=document.getElementById("address").value;
+			alert("You are searching: " + address);
+		}
+		
+		function handle(e){
+			address=document.getElementById("address").value;
+		    if(e.keyCode === 13){
+		    	alert("You are searching: " + address);
+		    }
+			return false;
+		}
+	</script>
+	<!-- from https://stackoverflow.com/questions/32032063/how-do-i-trigger-a-search-button-via-the-enter-key -->
+	
+	
+	<div class="leftSidebar">
+		<div id="artistbutton">
+		<label class= "radContainer">
+			<a href="url">ARTIST</a>
+		</label>
+			<div id="albumbutton">
+					<label class= "radContainer">
+					<a href="url">ALBUM</a>
+				</label>	
+		</div>
+			<div id="songbutton">
+					<label class= "radContainer">
+					<a href="url">SONG</a>
+					</label>
+			</div>
+		</div>
+		
+		<div id="albumCover">
+		</div>
+	</div>
+	
+	<table id="contentTable">
+		<tr class="header">
+			<th id="headerTitle">Title</th>
+			<th id="headerArtist">Artist</th>
+			<th id="headerAlbum">Album</th>
+			<th id="headerLength">Length</th>
+		</tr>
+		<tr class="songDummyStuff">
+			<td> Stairway to Heaven</td>
+			<td> Led Zeppelin</td>
+			<td> Led Zeppelin IV</td>
+			<td> 8:00</td>
+		</tr>		
+
+	</table>
+	
+	<div id="playControls">
+		<button id="btnBack">
+			<img src="images/131253-music/png/back.png" alt="back">
+		</button>
+		<button id="btnPlay">
+		<img src="images/131253-music/png/play-button.png" alt="play">
+		</button>
+		<button id="btnNext">
+		<img src="images/131253-music/png/next.png" alt="next">
+		</button>
+	</div>
+	
+<!-- 
+	https://www.flaticon.com/packs/music
+-->
+	
 </body>
 </html>
