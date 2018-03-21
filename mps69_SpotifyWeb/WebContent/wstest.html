@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+var songList=null;
+
+$(document).ready(function()){
+	$.get("GetSongList", function(){
+		songList = JSON.parse(data);
+		for(var i = 0 i<songList.legnth; i++){
+			console.log(songList[i].title);
+		}
+	});
+});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>
