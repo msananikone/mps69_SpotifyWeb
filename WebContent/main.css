@@ -1,4 +1,6 @@
 @charset "ISO-8859-1";
+/* Monica Sananikone
+1017 April 2018*/
 h1 {
 	text-align: center;
     color: white;
@@ -58,7 +60,7 @@ body {
 }
 
 nav {
-	background-color: rgba(0,0,0,.85);
+	background-color: rgba(0,0,0,.90);
     padding: 15px;
     width: 15%;
 }
@@ -94,7 +96,7 @@ nav button {
 
 main {
     align-items: center;
-    background-color: rgb(0,0,0,.95);
+    background-color: rgb(0,0,0,.88);
     color: white;
     display: flex;
     flex-direction: column;

@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- Monica Sananikone
+1017 April 2018-->
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
@@ -50,7 +52,44 @@
 	                displayData();
 	            });
 			});
-
+			//code ex stuff
+			function search(key, val){
+				var searchUrl = "api/get_songs?" + key + "=" + val;
+				// console.log(searchUrl);
+				$.get(searchUrl, function(data){
+					console.log(data);
+					searchResult = data;
+					songSearchResults(data);
+				});
+			}
+			
+			function songSearchResults(data){
+				var tbl = $("#tblData");
+				tbl.empty();
+				var displayLimit = 50;
+				
+				if(data.length < 50){
+					displayLimit = data.length;
+				}
+				
+				for(var i = 0; i < displayLimit; i++){
+					var tr = $("<tr></tr>");
+					var td = $("<td></td>");
+					td.html(data[i].title);
+					tr.append(td);
+					
+					td = $("<td></td>");
+					td.html(data[i].release_date)
+					tr.append(td);
+					
+					td = $("<td></td>");
+					td.html(data[i].length)
+					tr.append(td);
+					
+					tbl.append(tr);
+				}
+			}
+			//end stuff
             function displayData(){
             	$.get("api/get_songs?searchTerm=",function(data){
             		console.log(data);
