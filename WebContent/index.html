@@ -1,95 +1,160 @@
 <!DOCTYPE html>
 <html>
-<head>
-<<<<<<< HEAD
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-Hello World
-=======
-<meta charset="ISO-8859-1">
-	<title>Spotify</title>
-		<link rel = "stylesheet" type = "text/css"  href = "CSS.css"/>
-	
-</head>
-<body>
-	<form id="search-form">
-	    <div class="search">
-	      	<input id="address" type="text" onkeypress="handle(event)" placeholder="Search" class="round" color="white">
-			<input id="search" type="button" value="search" onClick="search_func()">
-	    </div>
-	</form>
-	<script>
-		function search_func(){
-			address=document.getElementById("address").value;
-			alert("You are searching: " + address);
-		}
-		
-		function handle(e){
-			address=document.getElementById("address").value;
-		    if(e.keyCode === 13){
-		    	alert("You are searching: " + address);
-		    }
-			return false;
-		}
-	</script>
-	<!-- from https://stackoverflow.com/questions/32032063/how-do-i-trigger-a-search-button-via-the-enter-key -->
-	
-	
-	<div class="leftSidebar">
-		<div id="artistbutton">
-		<label class= "radContainer">
-			<a href="url">ARTIST</a>
-		</label>
-			<div id="albumbutton">
-					<label class= "radContainer">
-					<a href="url">ALBUM</a>
-				</label>	
-		</div>
-			<div id="songbutton">
-					<label class= "radContainer">
-					<a href="url">SONG</a>
-					</label>
-			</div>
-		</div>
-		
-		<div id="albumCover">
-		</div>
-	</div>
-	
-	<table id="contentTable">
-		<tr class="header">
-			<th id="headerTitle">Title</th>
-			<th id="headerArtist">Artist</th>
-			<th id="headerAlbum">Album</th>
-			<th id="headerLength">Length</th>
-		</tr>
-		<tr class="songDummyStuff">
-			<td> Stairway to Heaven</td>
-			<td> Led Zeppelin</td>
-			<td> Led Zeppelin IV</td>
-			<td> 8:00</td>
-		</tr>		
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Monify Music</title>
+		<link rel="shortcut icon" href="img/music_2.ico">
+        
+        <!--CSS-->
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <!--JS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js"integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+        
+        <script>
+        	
+			$(document).ready(function(){
+	            var song = document.createElement('audio');            
+	            song.setAttribute('src', 'audio/bensound-pianomoment.mp3');
+	            //from https://www.bensound.com/royalty-free-music/cinematic
 
-	</table>
-	
-	<div id="playControls">
-		<button id="btnBack">
-			<img src="images/131253-music/png/back.png" alt="back">
-		</button>
-		<button id="btnPlay">
-		<img src="images/131253-music/png/play-button.png" alt="play">
-		</button>
-		<button id="btnNext">
-		<img src="images/131253-music/png/next.png" alt="next">
-		</button>
-	</div>
-	
-<!-- 
-	https://www.flaticon.com/packs/music
--->
-	
->>>>>>> 370e582c4efc12e616e1662d86f2e192dc9daa01
-</body>
+	            $("#playbtn").click(function(){
+	                song.play();
+	            });
+	            $("#pausebtn").click(function(){
+	                song.pause();
+	            });
+	            $("#replaybtn").click(function(){
+	                song.currentTime = 0;
+	                song.play();
+	            });
+	            $("#songbtn").click(function(){            	
+	                $("#songTbl").show();
+	                $("#artistTbl").hide();
+	                $("#albumTbl").hide();
+	                displayData();
+	            });
+	            $("#artistbtn").click(function(){
+	                $("#songTbl").hide();
+	                $("#artistTbl").show();
+	                $("#albumTbl").hide();
+	                displayData();
+	            });
+	            $("#albumbtn").click(function(){
+	                $("#songTbl").hide();
+	                $("#artistTbl").hide();
+	                $("#albumTbl").show();
+	                displayData();
+	            });
+			});
+
+            function displayData(){
+            	$.get("api/get_songs?searchTerm=",function(data){
+            		console.log(data);
+            		songSearchResults(data);
+            	})
+            }
+            
+			function songSearchResults(data){
+				console.log(data.songs);	
+				ko.applyBindings(data);
+			}
+
+			function songList(){
+				self = this;
+			}
+
+			function albumList(){
+				self = this;
+			}
+
+			function artistList(){
+				self = this;
+			}
+        </script>
+        
+	</head>
+	<body>
+        <section class="page">
+            <nav>
+                <h1>Monify Music</h1>
+                <br><br>
+                <form method="get" action="">
+			    <div class="search">
+			      <input type="text" name="search" class="round" placeholder="Search"/>
+			      <input type="submit" class="corner" value="" />
+			    </div>
+				</form>
+				<br><br>
+                <ul>
+                    <li><button id="songbtn">Songs</button></li>
+                    <li><button id="artistbtn">Artists</button></li>
+                    <li><button id="albumbtn">Albums</button></li>
+                </ul>
+				
+                <br><br>
+             <div class="container">
+			  	<div class="btn-holder">
+			  		<button id="playbtn"><i class="fas fa-play-circle"></i>Play</button>
+                		<button id="pausebtn"><i class="far fa-pause-circle"></i>Pause</button>
+                		<button id="replaybtn"><i class="fas fa-reply"></i>Replay</button>
+			  	</div>
+			</div>
+            </nav>
+
+            <main>
+				<table id="songTbl" border="1" cellspacing="3" cellpadding="4">
+					<thead>
+						<tr>
+					        <th>Title</th><th>Artist</th><th>Length</th><th>Release Date</th><th>Record Date</th>
+					    </tr>		
+				    </thead>
+				    <tbody data-bind="foreach: songData">
+					    <tr>
+					        <td data-bind="text: title"></td>
+					        <td data-bind="text: artist"></td>
+					        <td data-bind="text: length"></td>
+					        <td data-bind="text: release_date"></td>
+					        <td data-bind="text: record_date"></td>
+					    </tr> 
+				    </tbody>
+				</table>
+				
+				<table id="artistTbl" border="1" cellspacing="3" cellpadding="4">
+					<thead>
+						<tr>
+					        <th>First Name</th><th>Last Name</th><th>Band Name</th><th>Biography</th>
+					    </tr>		
+				    </thead>
+				    <tbody data-bind="foreach: artistData">
+					    <tr>
+					        <td data-bind="text: first_name"></td>
+					        <td data-bind="text: last_name"></td>
+					        <td data-bind="text: band_name"></td>
+					        <td data-bind="text: bio"></td>
+					    </tr> 
+				    </tbody>
+				</table>
+				<table id="albumTbl" border="1" cellspacing="3" cellpadding="4">
+					<thead>
+						<tr>
+					        <th>Title</th><th>Artist</th><th>Number of Tracks</th><th>Release Date</th><th>Record Date</th>
+					    </tr>		
+				    </thead>
+				    <tbody data-bind="foreach: albumData">
+					    <tr>
+					        <td data-bind="text: title"></td>
+					        <td data-bind="text: artist"></td>
+					        <td data-bind="text: number_of_tracks"></td>
+					        <td data-bind="text: release_date"></td>
+					        <td data-bind="text: record_date"></td>
+					    </tr> 
+				    </tbody>
+				</table>
+            </main>
+        </section>
+	</body>
 </html>

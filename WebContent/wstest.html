@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Web Service Test</title>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<!-- 
+<script>
+var songList = null;
+
+
+$(document).ready(function(){
+	//$.get("GetSongList?title=Stairway", function(data){
+	$.get("GetSongList", function(data){
+		// songList = JSON.parse(data);
+		songList = data;
+		console.log("songList");
+		/*
+		for(var i = 0; i < songList.length; i++){
+			console.log(songList[i].title);
+		}
+		*/
+	});
+	
+	
+});
+</script>
+ -->
+
+<script>
+var artistList = null;
+
+
+$(document).ready(function(){
+	$.get("GetArtistList", function(data){
+		// songList = JSON.parse(data);
+		artistList = data;
+		console.log(artistList);
+		/*
+		for(var i = 0; i < songList.length; i++){
+			console.log(songList[i].title);
+		}
+		*/
+	});
+	
+	
+});	
+</script>
+
+</head>
+<body>
+	
+</body>
+</html>
